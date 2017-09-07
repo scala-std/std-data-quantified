@@ -14,19 +14,24 @@ sealed abstract class ForallT {
 
     def mapK[F[_], G[_]](f: ∀[F])(fg: F ~> G): ∀[G]
 
-    final def of[F[_]]: MkForall[F] =
-        new MkForall[F]
-    final def apply[F[_]]: MkForall[F] =
-        new MkForall[F]
+    final def of[F[_]]: MkForall1[F] =
+        new MkForall1[F]
 }
 
-final class MkForall[F[_]](val b: Boolean = true) extends AnyVal {
+final class MkForall1[F[_]](val b: Boolean = true) extends AnyVal {
     type T
 
-    def apply(ft: F[T]): ∀[F] =
+    def apply(ft: F[this.T]): ∀[F] =
         from(ft)
 
-    def from(ft: F[T]): ∀[F] =
+    def from(ft: F[this.T]): ∀[F] =
+        ft.asInstanceOf[∀[F]]
+}
+
+final class MkForall(val b: Boolean = true) extends AnyVal {
+    type T
+
+    def apply[F[_]](ft: F[this.T]): ∀[F] =
         ft.asInstanceOf[∀[F]]
 }
 
