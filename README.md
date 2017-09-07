@@ -8,6 +8,8 @@
    If you want to witness that some type `F[_]` has a monoid instance
    regardless of the type argument, you can provide
    `Forall[λ[α => Monoid[F[α]]]]`.
+  * `Instance[F[_]]` is a more convenient version of `Exists[λ[α => (α, F[α])]]` 
+   that can be resolved implicitly (see example below).
 
 ## Quick Start
 ```scala
@@ -27,11 +29,15 @@ class Foo[A]
 val foo: ∀[Foo] = ∀(new Foo)
 foo[Int] // : Foo[Int]
 
-class Baz[A](val value: A) {
+class Baz[A](val x: A) {
     def show(a: A): String = a.toString
 }
 val baz: ∃[Baz] = ∃(new Baz(1))
-baz.value.show(baz.value.value) // "1"
+baz.value.show(baz.value.x) // "1"
+baz match { case Exists(f) => f.show(f.value) } // "1"
+
+val optToList: Option ~> List = FunctionK(_.toList)
+val listToOpt = FunctionK[List, Option](_.headOption)
 ```
 
 ## License
