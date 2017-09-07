@@ -25,7 +25,8 @@ final class ExistsT {
     def from[F[_]](instance: Instance[F]): ∃[λ[X => (X, F[X])]] =
         apply[λ[X => (X, F[X])], instance.Type]((instance.first, instance.second))
 
-    def unapply[F[_]](value: Exists[F]): Option[F[value.T]] =
+    // XXX[alex]: It is important to refer to the outside type here.
+    def unapply[F[_]](value: polymorphic.Exists[F]): Option[F[value.T]] =
         Some(value.asInstanceOf[F[value.T]])
 }
 

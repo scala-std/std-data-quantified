@@ -1,3 +1,5 @@
+import cats.arrow.FunctionK
+
 package object polymorphic {
     val Forall: ForallT = new ForallImpl
     type Forall[F[_]] = Forall.∀[F]
@@ -13,4 +15,6 @@ package object polymorphic {
 
     type ~>[A[_], B[_]] = cats.arrow.FunctionK[A, B]
     def fn: MkFunctionK = new MkFunctionK
+    implicit def toMkFunctionK(f: FunctionK.type): MkFunctionK =
+        new MkFunctionK
 }
