@@ -34,7 +34,7 @@ class Baz[A](val x: A) {
 }
 val baz: ∃[Baz] = ∃(new Baz(1))
 baz.value.show(baz.value.x) // "1"
-baz match { case Exists(f) => f.show(f.value) } // "1"
+baz match { case Exists(f) => f.show(f.x) } // "1"
 
 val optToList: Option ~> List = FunctionK(_.toList)
 val listToOpt = FunctionK[List, Option](_.headOption)
