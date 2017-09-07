@@ -24,6 +24,9 @@ final class ExistsT {
 
     def from[F[_]](instance: Instance[F]): ∃[λ[X => (X, F[X])]] =
         apply[λ[X => (X, F[X])], instance.Type]((instance.first, instance.second))
+
+    def unapply[F[_]](value: Exists[F]): Option[F[value.T]] =
+        Some(value.asInstanceOf[F[value.T]])
 }
 
 final class MkExists1[F[_]](val b: Boolean = true) extends AnyVal {
