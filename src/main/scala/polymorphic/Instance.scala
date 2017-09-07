@@ -32,6 +32,8 @@ object Instance {
         Value(Exists.unwrap[λ[X => (X, F[X])]](exists))
 
     def apply[F[_]]: PartialApply[F] = new PartialApply[F]
+
+    private[polymorphic]
     final class PartialApply[F[_]] {
         def apply[A](a: A)(implicit A: F[A]): Instance[F] = Value[F, A]((a, A))
     }

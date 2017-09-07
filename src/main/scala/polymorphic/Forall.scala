@@ -25,6 +25,7 @@ sealed abstract class ForallT {
     def const[A](a: A): ∀[λ[X => A]]
 }
 
+private[polymorphic]
 final class MkForall1[F[_]](val b: Int = 0) extends AnyVal {
     type T
 
@@ -35,6 +36,7 @@ final class MkForall1[F[_]](val b: Int = 0) extends AnyVal {
         ft.asInstanceOf[∀[F]]
 }
 
+private[polymorphic]
 final class MkForall(val b: Boolean = true) extends AnyVal {
     type T
 

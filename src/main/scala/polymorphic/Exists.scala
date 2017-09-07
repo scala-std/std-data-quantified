@@ -30,9 +30,12 @@ final class ExistsT {
         Some(value.asInstanceOf[F[value.T]])
 }
 
+private[polymorphic]
 final class MkExists1[F[_]](val b: Boolean = true) extends AnyVal {
     def apply[A](ft: F[A]): ∃[F] = Exists.wrap[F, A](ft)
 }
+
+private[polymorphic]
 final class MkExists(val b: Int = 0) extends AnyVal {
     def apply[F[_], A](ft: F[A]): ∃[F] = Exists.wrap[F, A](ft)
 }
