@@ -1,0 +1,5 @@
+package polymorphic
+
+class ForallTest {
+
+}
