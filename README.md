@@ -1,4 +1,5 @@
 # Polymorphic
+Un-boxed existential and universal quantifiers.
 
  * `Exists[F[_]]` witnesses that there exists some type `A` and a value of
    type `F[A]`. For instance, if you want to witness that a some type
