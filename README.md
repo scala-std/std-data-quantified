@@ -15,6 +15,25 @@ resolvers += Resolver.bintrayRepo("alexknvl", "maven")
 libraryDependencies += "com.alexknvl"  %%  "polymorphic" % "0.1.0"
 ```
 
+```scala
+import polymorphic._
+import polymorphic.syntax._
+
+def bar(a: Instance[Show]*): String =
+    a.map(x => x.second.show(x.first)).mkString(", ")
+bar(1, 2, 3) // "1, 2, 3"
+
+class Foo[A]
+val foo: ∀[Foo] = ∀(new Foo)
+foo[Int] // : Foo[Int]
+
+class Baz[A](val value: A) {
+    def show(a: A): String = a.toString
+}
+val baz: ∃[Baz] = ∃(new Baz(1))
+baz.value.show(baz.value.value) // "1"
+```
+
 ## License
 Code is provided under the MIT license available at https://opensource.org/licenses/MIT,
 as well as in the LICENSE file.
