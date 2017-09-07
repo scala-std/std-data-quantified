@@ -5,6 +5,8 @@ package object polymorphic {
     type Forall[F[_]] = Forall.∀[F]
     type ∀[F[_]]      = Forall.∀[F]
     def ∀ : MkForall = new MkForall
+    //def ∀[F[_]]: MkForall1[F] =
+    //    new MkForall1[F]
     implicit def toMkForall(f: ForallT): MkForall =
         new MkForall
 

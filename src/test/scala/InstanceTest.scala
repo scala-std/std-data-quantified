@@ -1,23 +1,31 @@
-import org.scalatest.FunSuite
+import org.scalatest.{FunSuite, Matchers}
 import polymorphic._
 import polymorphic.syntax.all._
 
-class InstanceTest extends FunSuite {
+class InstanceTest extends FunSuite with Matchers {
     trait Show[A] {
         def show(a: A): String
     }
 
-    test("implicit resolution") {
-        implicit val intShow: Show[Int] = (a: Int) => a.toString
+    implicit val intShow: Show[Int] = (a: Int) => a.toString
 
+    test("implicit resolution") {
         def foo(a: Instance[Show]): String =
             a.second.show(a.first)
-        foo(10)
+        foo(10) should be ("10")
 
         def bar(a: Instance[Show]*): String =
             a.map(x => x.second.show(x.first)).mkString(", ")
-        bar(1, 2, 3)
+        bar(1, 2, 3) should be ("1, 2, 3")
 
         val f1 = Instance[Show](1)
+    }
+
+    test("deconstruction") {
+        def foo(a: Instance[Show]): String = a match {
+            case Instance(i, s) => s.show(i)
+        }
+
+        foo(1) should be ("1")
     }
 }
