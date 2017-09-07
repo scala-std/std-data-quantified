@@ -20,7 +20,7 @@ libraryDependencies += "com.alexknvl"  %%  "polymorphic" % "0.1.0"
 
 ```scala
 import polymorphic._
-import polymorphic.syntax._
+import polymorphic.syntax.all._
 
 def bar(a: Instance[Show]*): String =
     a.map(x => x.second.show(x.first)).mkString(", ")
@@ -39,6 +39,14 @@ baz match { case Exists(f) => f.show(f.x) } // "1"
 
 val optToList: Option ~> List = FunctionK(_.toList)
 val listToOpt = FunctionK[List, Option](_.headOption)
+```
+
+## Boxing
+Neither `Exists` nor `Forall` box their contents. Both are essentially opaque 
+newtypes over `F[Any]`:
+```scala
+type Exists[F[_]] <: Any { type T = A }
+type Forall[F[_]] <: Any
 ```
 
 ## License
