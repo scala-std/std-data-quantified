@@ -12,6 +12,7 @@ package object polymorphic {
     type Exists[F[_]] = Exists.∃[F]
     type ∃[F[_]]      = Exists.∃[F]
     def ∃ : MkExists = new MkExists
+    def ∃[F[_]]: MkExists1[F] = new MkExists1[F]
 
     type ~>[A[_], B[_]] = cats.arrow.FunctionK[A, B]
     def fn: MkFunctionK = new MkFunctionK

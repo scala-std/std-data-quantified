@@ -16,6 +16,8 @@ sealed abstract class ForallT {
 
     final def of[F[_]]: MkForall1[F] =
         new MkForall1[F]
+
+    def const[A](a: A): ∀[λ[X => A]]
 }
 
 final class MkForall1[F[_]](val b: Boolean = true) extends AnyVal {
@@ -47,4 +49,6 @@ final class ForallImpl extends ForallT {
 
     def mapK[F[_], G[_]](f: ∀[F])(fg: F ~> G): ∀[G] =
         fg.apply[Any](f)
+
+    def const[A](a: A): ∀[λ[X => A]] = a
 }
