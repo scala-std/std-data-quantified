@@ -15,7 +15,7 @@ Un-boxed existential and universal quantifiers.
 ## Quick Start
 ```scala
 resolvers += Resolver.bintrayRepo("alexknvl", "maven")
-libraryDependencies += "com.alexknvl"  %%  "polymorphic" % "0.1.0"
+libraryDependencies += "com.alexknvl"  %%  "polymorphic" % "0.2.0"
 ```
 
 ```scala
