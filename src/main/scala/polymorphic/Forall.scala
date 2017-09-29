@@ -8,13 +8,13 @@ trait Prototype[+F[_]] {
     def apply[X]: F[X]
 }
 
-private[polymorphic] trait Forall1 {
+private[polymorphic] sealed trait Forall1 {
     import Forall._
     type Base
     type Type[+F[_]] <: Base with Tag
 }
-sealed trait Forall2 {
-    trait Tag extends Any
+private[polymorphic] sealed trait Forall2 {
+    sealed trait Tag extends Any
 }
 object Forall extends Forall1 with Forall2 {
     final def specialize[F[_], A](v: Type[F]): F[A] =

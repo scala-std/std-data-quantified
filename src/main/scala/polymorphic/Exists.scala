@@ -6,8 +6,8 @@ private[polymorphic] sealed trait Exists1 {
     import Exists._
     type Type[+F[_]] <: (Any { type T }) with Tag
 }
-sealed trait Exists2 {
-    trait Tag extends Any
+private[polymorphic] sealed trait Exists2 {
+    sealed trait Tag extends Any
 }
 object Exists extends Exists1 with Exists2 {
     def wrap[F[_], A](value: F[A]): Type[F] =

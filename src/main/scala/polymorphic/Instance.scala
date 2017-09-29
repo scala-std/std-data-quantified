@@ -7,13 +7,13 @@ sealed trait Instance[F[_]] { fa =>
     def first: Type
     def second: F[Type]
 
-    def mapK[G[_]](fg: F ~> G): Instance[G] =
+    final def mapK[G[_]](fg: F ~> G): Instance[G] =
         Value((first, fg.apply(second)))
 
-    def toScala: (A, F[A]) forSome { type A } =
+    final def toScala: (A, F[A]) forSome { type A } =
         (first, second)
 
-    def toExists: Exists[λ[X => (X, F[X])]] =
+    final def toExists: Exists[λ[X => (X, F[X])]] =
         Exists.from(this)
 
     override def toString: String = first.toString
