@@ -7,7 +7,9 @@ class InstanceTest extends FunSuite with Matchers {
         def show(a: A): String
     }
 
-    implicit val intShow: Show[Int] = (a: Int) => a.toString
+    implicit val intShow: Show[Int] = new Show[Int] {
+        def show(a: Int): String = a.toString
+    }
 
     test("implicit resolution") {
         def foo(a: Instance[Show]): String =

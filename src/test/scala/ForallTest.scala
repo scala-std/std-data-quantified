@@ -32,4 +32,8 @@ class ForallTest extends FunSuite with Matchers {
         val f3 = Forall.const(1)
         f3.getClass should be (classOf[java.lang.Integer])
     }
+
+    test("arrays") {
+        val f1: Array[∀[Foo]] = Array(∀(new Foo))
+    }
 }

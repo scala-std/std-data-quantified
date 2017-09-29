@@ -45,4 +45,17 @@ class ExistsTest extends FunSuite with Matchers {
         val f3 = ∃[λ[X => Int]](1)
         f3.getClass should be (classOf[java.lang.Integer])
     }
+
+    test("arrays") {
+        val f1: ∃[Array] = ∃(Array[Int](1))
+        f1.getClass should be (classOf[Array[Int]])
+        val a = f1.value(0)
+        a.getClass should be (classOf[java.lang.Integer])
+
+        Array(∃[Option](Some(1)))
+
+        val f2: Array[∃[Id]] = Array(∃[Id](1), ∃[Id]("str"))
+        f2(0) should be (1)
+        f2(1) should be ("str")
+    }
 }
