@@ -41,13 +41,17 @@ val optToList: Option ~> List = FunctionK(_.toList)
 val listToOpt = FunctionK[List, Option](_.headOption)
 ```
 
-## Boxing
+## Implementation notes
 Neither `Exists` nor `Forall` box their contents. Both are essentially opaque 
 newtypes over `F[X]`:
 ```scala
 type Exists[F[_]] <: Any { type T = A }
 type Forall[F[_]] <: Any
 ```
+
+Note that `Forall[F]` is evaluated **eagerly and only once**. If you need a lazy 
+version of `Forall` you might want to consider wrapping `F` into `cats.Eval` or
+similar.
 
 ## License
 Code is provided under the MIT license available at https://opensource.org/licenses/MIT,
