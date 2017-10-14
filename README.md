@@ -11,11 +11,16 @@ Un-boxed existential and universal quantifiers.
    `Forall[λ[α => Monoid[F[α]]]]`.
   * `Instance[F[_]]` is a more convenient version of `Exists[λ[α => (α, F[α])]]` 
    that can be resolved implicitly (see example below).
+  * `Sigma[A, F[_]]` is a dependent pair of `a: A` and `F[a.type]`. You can use 
+   `Sigma.summon` to implicitly summon a proof for a given value: 
+   `summon[λ[x => x <:< List[Int]]](Nil)` - is `Nil` together with a proof that
+   it is a subtype of `List[Int]`.
+  * `Pi[A, F[_]]` is a dependent function from `a: A` to `F[a.type]`.
 
 ## Quick Start
 ```scala
 resolvers += Resolver.bintrayRepo("alexknvl", "maven")
-libraryDependencies += "com.alexknvl"  %%  "polymorphic" % "0.2.0"
+libraryDependencies += "com.alexknvl"  %%  "polymorphic" % "0.3.0"
 ```
 
 ```scala

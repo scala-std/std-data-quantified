@@ -9,9 +9,10 @@ val catsLibraries = List(
 lazy val commonSettings = List(
   addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4"),
   organization      := "com.alexknvl",
-  version           := "0.2.1",
-  scalaVersion      := "2.12.3",
-  crossScalaVersions := Seq("2.10.6", "2.11.11"),
+  version           := "0.3.0",
+  scalaVersion      := "2.12.1",
+  scalaOrganization := "org.typelevel",
+  crossScalaVersions := Seq("2.11.8"),
   licenses += ("MIT", url("http://opensource.org/licenses/MIT")),
   scalacOptions ++= List(
     "-deprecation", "-unchecked", "-feature",
@@ -20,6 +21,7 @@ lazy val commonSettings = List(
     "-language:higherKinds",
     "-language:implicitConversions",
     "-Yno-adapted-args", "-Ywarn-dead-code",
+    "-Yliteral-types",
     "-Ywarn-numeric-widen", "-Xfuture"),
   resolvers ++= List(
     Resolver.sonatypeRepo("snapshots"),
