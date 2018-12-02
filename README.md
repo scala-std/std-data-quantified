@@ -9,10 +9,10 @@ Un-boxed existential and universal quantifiers.
    If you want to witness that some type `F[_]` has a monoid instance
    regardless of the type argument, you can provide
    `Forall[λ[α => Monoid[F[α]]]]`.
-  * `Instance[F[_]]` is a more convenient version of `Exists[λ[α => (α, F[α])]]` 
+  * `Instance[F[_]]` is a more convenient version of `Exists[λ[α => (α, F[α])]]`
    that can be resolved implicitly (see example below).
-  * `Sigma[A, F[_]]` is a dependent pair of `a: A` and `F[a.type]`. You can use 
-   `Sigma.summon` to implicitly summon a proof for a given value: 
+  * `Sigma[A, F[_]]` is a dependent pair of `a: A` and `F[a.type]`. You can use
+   `Sigma.summon` to implicitly summon a proof for a given value:
    `summon[λ[x => x <:< List[Int]]](Nil)` - is `Nil` together with a proof that
    it is a subtype of `List[Int]`.
   * `Pi[A, F[_]]` is a dependent function from `a: A` to `F[a.type]`.
@@ -20,7 +20,7 @@ Un-boxed existential and universal quantifiers.
 ## Quick Start
 ```scala
 resolvers += Resolver.bintrayRepo("alexknvl", "maven")
-libraryDependencies += "com.alexknvl"  %%  "polymorphic" % "0.3.0"
+libraryDependencies += "com.alexknvl"  %%  "polymorphic" % "0.4.0"
 ```
 
 ```scala
@@ -47,14 +47,14 @@ val listToOpt = FunctionK[List, Option](_.headOption)
 ```
 
 ## Implementation notes
-Neither `Exists` nor `Forall` box their contents. Both are essentially opaque 
+Neither `Exists` nor `Forall` box their contents. Both are essentially opaque
 newtypes over `F[X]`:
 ```scala
 type Exists[F[_]] <: Any { type T = A }
 type Forall[F[_]] <: Any
 ```
 
-Note that `Forall[F]` is evaluated **eagerly and only once**. If you need a lazy 
+Note that `Forall[F]` is evaluated **eagerly and only once**. If you need a lazy
 version of `Forall` you might want to consider wrapping `F` into `cats.Eval` or
 similar.
 

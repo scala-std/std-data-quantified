@@ -1,15 +1,15 @@
 val testLibraries = List(
-  "org.scalacheck" %% "scalacheck" % "1.13.5" % "test",
-  "org.typelevel" %% "discipline" % "0.8" % "test",
-  "org.scalatest" %% "scalatest" % "3.0.4" % "test")
+  "org.scalacheck" %% "scalacheck" % "1.14.0" % "test",
+  "org.typelevel" %% "discipline" % "0.10.0" % "test",
+  "org.scalatest" %% "scalatest" % "3.0.5" % "test")
 
 val catsLibraries = List(
-  "org.typelevel" %% "cats-core" % "1.0.0-MF")
+  "org.typelevel" %% "cats-core" % "1.5.0-RC1")
 
 lazy val commonSettings = List(
   addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.4"),
   organization      := "com.alexknvl",
-  version           := "0.3.0",
+  version           := "0.4.0",
   scalaVersion      := "2.12.1",
   scalaOrganization := "org.typelevel",
   crossScalaVersions := Seq("2.11.8"),
