@@ -9,8 +9,8 @@ val catsLibraries = List(
 lazy val commonSettings = List(
   addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3"),
   organization      := "com.alexknvl",
-  version           := "0.4.0",
-  scalaVersion      := "2.12.1",
+  version           := "0.5.0",
+  scalaVersion      := "2.12.0",
   scalaOrganization := {
     if (CrossVersion.partialVersion(scalaVersion.value).exists(_._2 >= 13))
       "org.scala-lang"
