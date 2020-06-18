@@ -1,5 +1,5 @@
 organization := Settings.Organization
-name         := "std-quantified"
+name         := "std-data-quantified"
 version      := Settings.Version
 licenses     += ("MIT", url("http://opensource.org/licenses/MIT"))
 
