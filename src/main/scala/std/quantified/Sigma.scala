@@ -1,6 +1,4 @@
-package polymorphic
-
-import cats.data.{EitherK, Tuple2K}
+package std.quantified
 
 sealed abstract class Sigma[+A, F[_]] { fa =>
   val first: A
@@ -26,10 +24,10 @@ object Sigma {
     Sigma[B, λ[b => Sigma[A, λ[a => F[a, b]]]]](f.second.first)(
       Sigma[A, λ[a => F[a, f.second.first.type]]](f.first)(f.second.second))
 
-  final def or[A, F[_], G[_]](fg: Either[Sigma[A, F], Sigma[A, G]]): Sigma[A, EitherK[F, G, ?]] =
+  final def or[A, F[_], G[_]](fg: Either[Sigma[A, F], Sigma[A, G]]): Sigma[A, λ[x => F[x] Either G[x]]] =
     fg match {
-      case Left(af) => Sigma[A, EitherK[F, G, ?]](af.first)(EitherK.leftc(af.second))
-      case Right(ag) => Sigma[A, EitherK[F, G, ?]](ag.first)(EitherK.rightc(ag.second))
+      case Left(af) => Sigma[A, λ[x => F[x] Either G[x]]](af.first)(Left(af.second))
+      case Right(ag) => Sigma[A, λ[x => F[x] Either G[x]]](ag.first)(Right(ag.second))
     }
 
   final def const[A, B](a: A)(b: B): Sigma[B, λ[b => a.type]] =

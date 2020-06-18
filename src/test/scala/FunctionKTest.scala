@@ -1,6 +1,5 @@
-import cats.arrow.FunctionK
 import org.scalatest.FunSuite
-import polymorphic._
+import std.quantified._
 
 class FunctionKTest extends FunSuite {
     test("constructors") {

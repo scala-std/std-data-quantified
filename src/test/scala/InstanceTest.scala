@@ -1,6 +1,6 @@
 import org.scalatest.{FunSuite, Matchers}
-import polymorphic._
-import polymorphic.syntax.all._
+import std.quantified._
+import std.quantified.syntax.all._
 
 class InstanceTest extends FunSuite with Matchers {
     trait Show[A] {

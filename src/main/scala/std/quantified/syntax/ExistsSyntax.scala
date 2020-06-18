@@ -1,6 +1,6 @@
-package polymorphic.syntax
+package std.quantified.syntax
 
-import polymorphic.{Exists, ~>}
+import std.quantified.{Exists, ~>}
 
 object ExistsSyntax {
     final class ExistsOps[F[_], A](val fa: Exists[F] { type T = A }) extends AnyVal {

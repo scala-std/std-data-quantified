@@ -1,6 +1,4 @@
-package polymorphic
-
-import cats.data.{EitherK, Tuple2K}
+package std.quantified
 
 import scala.reflect.ClassTag
 
@@ -20,10 +18,10 @@ trait Pi[-A, F[_]] { fa =>
 }
 
 object Pi {
-  final def and[A, F[_], G[_]](f: Pi[A, F], g: Pi[A, G]): Pi[A, Tuple2K[F, G, ?]] =
-    new Pi[A, Tuple2K[F, G, ?]] {
-      override def apply(a: A): Tuple2K[F, G, a.type] =
-        Tuple2K(f.apply(a), g.apply(a))
+  final def and[A, F[_], G[_]](f: Pi[A, F], g: Pi[A, G]): Pi[A, λ[x => (F[x], G[x])]] =
+    new Pi[A, λ[x => (F[x], G[x])]] {
+      override def apply(a: A): (F[a.type], G[a.type]) =
+        (f.apply(a), g.apply(a))
     }
 
   final def flip[A, B, F[_, _]](f: Pi[A, λ[a => Pi[B, λ[b => F[a, b]]]]]): Pi[B, λ[b => Pi[A, λ[a => F[a, b]]]]] =
@@ -33,11 +31,11 @@ object Pi {
       }
     }
 
-  final def or[A, F[_], G[_]](fg: Either[Pi[A, F], Pi[A, G]]): Pi[A, EitherK[F, G, ?]] =
-    new Pi[A, EitherK[F, G, ?]] {
-      override def apply(a: A): EitherK[F, G, a.type] = fg match {
-        case Left(af) => EitherK.leftc(af.apply(a))
-        case Right(ag) => EitherK.rightc(ag.apply(a))
+  final def or[A, F[_], G[_]](fg: Either[Pi[A, F], Pi[A, G]]): Pi[A, λ[x => F[x] Either G[x]]] =
+    new Pi[A, λ[x => F[x] Either G[x]]] {
+      override def apply(a: A): F[a.type] Either G[a.type] = fg match {
+        case Left(af)  => Left(af.apply(a))
+        case Right(ag) => Right(ag.apply(a))
       }
     }
 

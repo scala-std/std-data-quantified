@@ -1,4 +1,4 @@
-package polymorphic.syntax
+package std.quantified.syntax
 
 object exists extends ExistsSyntax
 object forall extends ForallSyntax

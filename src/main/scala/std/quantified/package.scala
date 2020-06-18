@@ -1,6 +1,6 @@
-import cats.arrow.FunctionK
+package std
 
-package object polymorphic {
+package object quantified {
     type Forall[F[_]] = Forall.type#Type[F]
     type ∀[F[_]]      = Forall.type#Type[F]
     def ∀      : MkForall     = new MkForall
@@ -13,8 +13,11 @@ package object polymorphic {
     def ∃      : MkExists     = new MkExists
     def ∃[F[_]]: MkExists1[F] = new MkExists1[F]
 
-    type ~>[A[_], B[_]] = cats.arrow.FunctionK[A, B]
+    type ~>[A[_], B[_]] = FunctionK[A, B]
     def fn: MkFunctionK = new MkFunctionK
     implicit def toMkFunctionK(f: FunctionK.type): MkFunctionK =
         new MkFunctionK
+
+    type Implies[A, B] = Implies.Type[A, B]
+    type |-[A, B] = Implies.Type[A, B]
 }

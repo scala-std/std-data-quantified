@@ -1,7 +1,6 @@
-import cats.Id
 import org.scalatest.{FunSuite, Matchers}
-import polymorphic._
-import polymorphic.syntax.all._
+import std.quantified._
+import std.quantified.syntax.all._
 
 import scala.reflect.runtime.universe._
 
@@ -39,7 +38,7 @@ class ExistsTest extends FunSuite with Matchers {
         val f1: ∃[Foo] = ∃(new Foo(1))
         f1.getClass should be (classOf[Foo[_]])
 
-        val f2: ∃[Id] = ∃[Id](1)
+        val f2: ∃[λ[x => x]] = ∃[λ[x => x]](1)
         f2.getClass should be (classOf[java.lang.Integer])
 
         val f3 = ∃[λ[X => Int]](1)
@@ -54,6 +53,7 @@ class ExistsTest extends FunSuite with Matchers {
 
         Array(∃[Option](Some(1)))
 
+        type Id[x] = x
         val f2: Array[∃[Id]] = Array(∃[Id](1), ∃[Id]("str"))
         f2(0) should be (1)
         f2(1) should be ("str")

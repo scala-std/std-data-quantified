@@ -1,7 +1,6 @@
-package polymorphic.syntax
+package std.quantified.syntax
 
-import cats.data.Tuple2K
-import polymorphic.{Forall, ~>, ∀}
+import std.quantified.{Forall, ~>, ∀}
 
 object ForallSyntax {
     final class Ops[F[_]](val f: ∀[F]) extends AnyVal {
@@ -11,7 +10,7 @@ object ForallSyntax {
         def mapK[G[_]](fg: F ~> G): ∀[G] =
             Forall.mapK[F, G](f)(fg)
 
-        def and[G[_]](g: ∀[G]): ∀[λ[X => Tuple2K[F, G, X]]] =
+        def and[G[_]](g: ∀[G]): ∀[λ[x => (F[x], G[x])]] =
             Forall.and[F, G](f, g)
 
         def lift[G[_]]: ∀[λ[X => F[G[X]]]] =
