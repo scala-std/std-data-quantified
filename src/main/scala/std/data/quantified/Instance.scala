@@ -1,4 +1,4 @@
-package std.quantified
+package std.data.quantified
 
 sealed trait Instance[F[_]] { fa =>
   import Instance._

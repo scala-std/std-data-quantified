@@ -1,6 +1,7 @@
-package std.quantified.syntax
+package std.data.quantified.syntax
 
-import std.quantified.{Exists, ~>}
+import std.data.quantified.Exists
+import std.data.quantified.{Exists, ~>}
 
 object ExistsSyntax {
     final class ExistsOps[F[_], A](val fa: Exists[F] { type T = A }) extends AnyVal {

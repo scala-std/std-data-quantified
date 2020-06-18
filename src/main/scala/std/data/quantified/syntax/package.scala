@@ -1,4 +1,4 @@
-package std.quantified.syntax
+package std.data.quantified.syntax
 
 object exists extends ExistsSyntax
 object forall extends ForallSyntax

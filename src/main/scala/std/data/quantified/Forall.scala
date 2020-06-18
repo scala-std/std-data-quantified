@@ -1,4 +1,4 @@
-package std.quantified
+package std.data.quantified
 
 import scala.reflect.ClassTag
 import scala.reflect.macros.{TypecheckException, blackbox}

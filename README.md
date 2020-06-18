@@ -27,7 +27,7 @@ libraryDependencies += "com.alexknvl"  %%  "polymorphic" % "0.5.0"
 ```scala
 import polymorphic._
 
-import std.quantified.syntax.all._
+import std.data.quantified.syntax.all._
 
 def bar(a: Instance[Show]*): String =
     a.map(x => x.second.show(x.first)).mkString(", ")

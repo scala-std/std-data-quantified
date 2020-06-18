@@ -1,4 +1,4 @@
-package std
+package std.data
 
 package object quantified {
     type Forall[F[_]] = Forall.type#Type[F]

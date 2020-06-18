@@ -1,5 +1,5 @@
 import org.scalatest.FunSuite
-import std.quantified._
+import std.data.quantified._
 
 class FunctionKTest extends FunSuite {
     test("constructors") {

@@ -1,6 +1,6 @@
 import org.scalatest.{FunSuite, Matchers}
-import std.quantified._
-import std.quantified.syntax.all._
+import std.data.quantified._
+import std.data.quantified.syntax.all._
 
 import scala.reflect.runtime.universe._
 

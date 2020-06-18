@@ -1,6 +1,7 @@
-package std.quantified.syntax
+package std.data.quantified.syntax
 
-import std.quantified.{Forall, ~>, ∀}
+import std.data.quantified.Forall
+import std.data.quantified.{Forall, ~>, ∀}
 
 object ForallSyntax {
     final class Ops[F[_]](val f: ∀[F]) extends AnyVal {

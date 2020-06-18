@@ -1,4 +1,4 @@
-package std.quantified
+package std.data.quantified
 
 sealed abstract class Sigma[+A, F[_]] { fa =>
   val first: A

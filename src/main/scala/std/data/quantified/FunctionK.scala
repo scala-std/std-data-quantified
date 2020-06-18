@@ -1,4 +1,4 @@
-package std.quantified
+package std.data.quantified
 
 trait FunctionK[F[_], G[_]] { fg =>
   def apply[A](fa: F[A]): G[A]
