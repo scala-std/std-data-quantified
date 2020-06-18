@@ -29,7 +29,7 @@ final class ImplicationMacro(val c: blackbox.Context) {
     try c.typecheck(q"""
         {
           def run(implicit $dummy0: $A): $B = implicitly[$B]
-          ((x: $A) => run(x)).asInstanceOf[_root_.std.quantified.Implies.Type[$A, $B]]
+          ((x: $A) => run(x)).asInstanceOf[_root_.std.data.quantified.Implies.Type[$A, $B]]
         }
       """)
     catch {
